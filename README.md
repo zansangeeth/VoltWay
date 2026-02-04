@@ -11,6 +11,18 @@ VoltWay is your simple and smart companion for finding electric vehicle (EV) cha
 - 🔔 **Arrival Alerts:** Get notified the moment you arrive at the charging station.
 - 📱 **Clean Interface:** Designed with a modern, dark-mode look that is easy on the eyes.
 
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+![ezgif-7aa85e9e8593c410](https://github.com/user-attachments/assets/ead1cf79-9f3e-4f1a-9953-13b5c1514fd5)
+
+
+# Screenshots
+Screen | Current Location | Nearby Stations | Navigation using Geofencing |
+--- | --- | --- | --- |
+Images | <img width="200" height="500" alt="Screenshot_20260204_203520" src="https://github.com/user-attachments/assets/f424d3a1-6203-4b60-b0c5-33fa9b83baee" /> | <img width="200" height="500" alt="Screenshot_20260204_203547" src="https://github.com/user-attachments/assets/985bdc96-c4d2-40b1-8f20-db18c86e3a3f" /> | <img width="200" height="500" alt="Screenshot_20260204_203611" src="https://github.com/user-attachments/assets/3b125f56-2eeb-4935-ba9a-44b9a77d3338" /> |
+
 ## How to Use
 
 1. **Open the App:** Allow location permissions so the app can find stations around you.
