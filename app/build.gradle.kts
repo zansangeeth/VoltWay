@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.ksp)
 }
 
 android {
@@ -46,6 +47,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
+    implementation(libs.androidx.appcompat)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -54,15 +56,12 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-    //mapbox
-    dependencies {
-
-        implementation("com.mapbox.search:autofill-ndk27:2.18.0")
-        implementation("com.mapbox.search:discover-ndk27:2.18.0")
-        implementation("com.mapbox.search:place-autocomplete-ndk27:2.18.0")
-        implementation("com.mapbox.search:offline-ndk27:2.18.0")
-        implementation("com.mapbox.search:mapbox-search-android-ndk27:2.18.0")
-        implementation("com.mapbox.search:mapbox-search-android-ui-ndk27:2.18.0")
-
-    }
+    // Mapbox Maps SDK (Compose) and networking libraries
+    implementation("com.mapbox.maps:android:10.14.0")
+    // implementation("com.mapbox.extension:maps-compose:10.14.0") // Removed due to resolution failure
+    implementation("com.squareup.okhttp3:okhttp:4.11.0")
+    implementation("com.squareup.moshi:moshi:1.14.0")
+    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
+    ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
 }
