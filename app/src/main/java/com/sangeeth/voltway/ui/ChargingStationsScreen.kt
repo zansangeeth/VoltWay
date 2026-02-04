@@ -23,6 +23,8 @@ import com.mapbox.maps.MapView
 import com.mapbox.maps.Style
 import com.mapbox.maps.plugin.animation.flyTo
 import com.mapbox.maps.plugin.locationcomponent.location
+import com.mapbox.maps.plugin.locationcomponent.createDefault2DPuck
+import com.mapbox.maps.plugin.LocationPuck2D
 import com.mapbox.geojson.LineString
 import com.mapbox.geojson.Point
 import com.mapbox.maps.plugin.annotation.annotations
@@ -42,6 +44,7 @@ fun ChargingStationsScreen(
     onCancelNavigation: (() -> Unit)? = null
 ) {
     val scaffoldState = rememberBottomSheetScaffoldState()
+    var polylineAnnotationManager by remember { mutableStateOf<PolylineAnnotationManager?>(null) }
     
     BottomSheetScaffold(
         scaffoldState = scaffoldState,
@@ -83,7 +86,10 @@ fun ChargingStationsScreen(
                 factory = { context ->
                     MapView(context).apply {
                         getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS) {
-                            location.enabled = true
+                            location.updateSettings {
+                                enabled = true
+                                locationPuck = location.createDefault2DPuck(context, withBearing = true)
+                            }
                         }
                         
                         getMapboxMap().setCamera(
@@ -93,6 +99,9 @@ fun ChargingStationsScreen(
                                 .pitch(if (isNavigating) 45.0 else 0.0)
                                 .build()
                         )
+                        
+                        // Initialize manager once
+                        polylineAnnotationManager = annotations.createPolylineAnnotationManager()
                     }
                 },
                 update = { mapView ->
@@ -107,18 +116,16 @@ fun ChargingStationsScreen(
                         )
                     }
 
-                    // Handle route line drawing
-                    if (routePoints.isNotEmpty()) {
-                        val annotationApi = mapView.annotations
-                        val polylineAnnotationManager = annotationApi.createPolylineAnnotationManager()
-                        polylineAnnotationManager.deleteAll()
-                        
-                        val polylineAnnotationOptions = PolylineAnnotationOptions()
-                            .withPoints(routePoints)
-                            .withLineColor("#007AFF")
-                            .withLineWidth(6.0)
-                        
-                        polylineAnnotationManager.create(polylineAnnotationOptions)
+                    // Handle route line drawing using the persistent manager
+                    polylineAnnotationManager?.let { manager ->
+                        manager.deleteAll()
+                        if (routePoints.isNotEmpty()) {
+                            val polylineAnnotationOptions = PolylineAnnotationOptions()
+                                .withPoints(routePoints)
+                                .withLineColor("#007AFF")
+                                .withLineWidth(6.0)
+                            manager.create(polylineAnnotationOptions)
+                        }
                     }
                 }
             )
