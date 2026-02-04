@@ -27,7 +27,14 @@ data class Properties(
     val name: String?,
     @Json(name = "full_address") val fullAddress: String?,
     val distance: Double?,
-    val coordinates: MapboxCoordinates?
+    val coordinates: MapboxCoordinates?,
+    val metadata: MapboxMetadata?
+)
+
+@JsonClass(generateAdapter = true)
+data class MapboxMetadata(
+    val phone: String?,
+    val website: String?
 )
 
 @JsonClass(generateAdapter = true)

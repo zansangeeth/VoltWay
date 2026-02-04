@@ -64,4 +64,11 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
     ksp("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
     implementation("com.google.android.gms:play-services-location:21.0.1")
+    
+    // Mapbox SDKs
+    implementation("com.mapbox.mapboxsdk:mapbox-sdk-turf:7.9.0")
+    
+    // Mapbox Navigation SDK from libs
+    implementation(libs.mapbox.navigation)
+    implementation(libs.mapbox.navigation.ui)
 }

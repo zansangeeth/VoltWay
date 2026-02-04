@@ -10,8 +10,11 @@ kotlin = "2.2.10"
 ksp = "2.2.10-2.0.2"
 appcompat = "1.6.1"
 composeBom = "2024.09.00"
+mapboxNavigation = "2.21.0"
 
 [libraries]
+mapbox-navigation = { group = "com.mapbox.navigation", name = "android", version.ref = "mapboxNavigation" }
+mapbox-navigation-ui = { group = "com.mapbox.navigation", name = "ui-dropin", version.ref = "mapboxNavigation" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
